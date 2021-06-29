@@ -44,10 +44,12 @@ console.log(arrR2);
 
 let groupByObj = (arrayOfObjects, fieldOfID) =>
   arrayOfObjects.reduce((obj, next) => {
-    if (obj[next[fieldOfID || 'id']]) obj[next[fieldOfID || 'id']].push(next);
-    else {
-      obj[next[fieldOfID || 'id']] = [next];
-      //obj[next['id']].push(next);
+    if (obj[next[fieldOfID || 'id']]) {
+      obj[next[fieldOfID || 'id']].content.push(next);
+      obj[next[fieldOfID || 'id']].len = obj[next[fieldOfID || 'id']].len + 1;
+    } else {
+      obj[next[fieldOfID || 'id']] = { content: [next] };
+      obj[next[fieldOfID || 'id']].len = 1;
     }
 
     return obj;
